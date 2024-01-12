@@ -11,22 +11,26 @@ const bobsCar = {
 
 if (bobsCar.info.mileage === 0) {
     console.log(`Bob owns ${bobsCar.make} ${bobsCar.model} and it is brand new!`)
-}else if (bobsCar.info.mileage < 1000){
+} else if (bobsCar.info.mileage < 1000) {
     console.log(`Bob owns ${bobsCar.make} ${bobsCar.model} and it is almost new!`)
-}else {
+} else {
     console.log(`Bob owns ${bobsCar.make} ${bobsCar.model} and it is old!`)
 }
 
 //!------------Task2-------------
 
-function num (x, y) {
-    let num = x + y;
-
-    if (num < 0) {
-        num = -num;
+function num(x, y) {
+    if (x < 0) {
+        x = x * -1;
     }
+    if (y < 0) {
+        y = y * -1;
+    }
+    let num;
+    num = x + y;
     return num;
 }
+
 const x = -2;
 const y = -3;
 
@@ -57,16 +61,12 @@ const newOwner = {
     age: 50
 }
 
-function newRegistry (registry, newOwner) {
-
-    return {
-        ...registry,
-
-        owner: {
-            name: newOwner.name,
-            age: newOwner.age
-        }
-    };
+function newRegistry(registry, newOwner) {
+    let newObject = registry;
+    if (undefined !== newObject.owner) {
+        newObject.owner = newOwner;
+    }
+    return newObject;
 }
 
 const updatedRegistry = newRegistry(registry, newOwner);
@@ -77,11 +77,16 @@ console.log(updatedRegistry);
 
 const numsArray = [1, 12, 34, 71, 14, 12, 33, 70, 82, 81, 9, 19, 90];
 
-let even = numsArray.filter(val => {
-    return val % 2 === 0;
-});
+function sumEvenNumbers(arr) {
+    return arr
+        .filter(num => num % 2 === 0)
+        .reduce((sum, num) => sum + num, 0);
+}
 
-console.log(even);
+const resultSum = sumEvenNumbers(numsArray);
+
+
+console.log(resultSum);
 
 //!------------Task5-------------
 
@@ -111,7 +116,8 @@ const people = [
         age: 17
     }
 ]
-function filterOlder18 (people) {
+
+function filterOlder18(people) {
     const older18 = people.filter(person => person.age >= 18);
     console.log(older18);
 }
